@@ -1,0 +1,17 @@
+p#first-line, p#second-line{
+    text-align: center;
+    margin: 100px auto;
+}
+
+#first-line{
+    font-size: 50px;
+    strong{
+        color: #D7370F;
+    }
+}
+#second-line{
+    font-size: 72px;
+    strong{
+        color: #4A23BF
+    }
+}
