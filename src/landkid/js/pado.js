@@ -22,10 +22,12 @@ window.onload = function(){
         var draw = function() {
             requestAnimationFrame(draw);
             analyser.getByteFrequencyData(frequencyArray);
-            slideValue1 = frequencyArray[0] / 200;
-            slideValue2 = frequencyArray[5] / 200;
-            slideValue3 = frequencyArray[10] / 200;
-            console.log(frequencyArray);
+            // slideValue1 = frequencyArray[0] / 100;
+            // slideValue2 = frequencyArray[3] / 100;
+            // slideValue3 = frequencyArray[5] / 100;
+            slideValue1 = .9;
+            slideValue2 = .9;
+            slideValue3 = .9;
 
         };
         draw();
@@ -45,8 +47,8 @@ window.onload = function(){
 
     $(".slider").slider({
         animate: "fast",
-        max: 3,
-        min: 0.5,
+        max: 20,
+        min: -20,
         step: 0.01
     });
 
@@ -77,6 +79,8 @@ window.onload = function(){
     var amplitude3;
 
     function drawAll() {
+        requestAnimationFrame(drawAll);
+
         padoCtx.clearRect(0, 0, pado.width, pado.height);
 
         if(frames % 120 === 0) {
@@ -87,9 +91,9 @@ window.onload = function(){
 
         }
 
-        drawPado(pado.width, pado.height, 47 * (0.5 + slideValue1), 0.005, 7, 500, "rgba(0, 0, 255, 0.5)", 19 ,23);
-        drawPado(pado.width, pado.height, 59 * (0.5 + slideValue2), 0.007, 5, 500, "rgba(255, 0, 0, 0.5)", 17, 37);
-        drawPado(pado.width , pado.height, 31 * (0.5 + slideValue3), 0.01, 11, 500, "rgba(0, 255, 0, 0.5)", 29, 31);
+        drawPado(pado.width, pado.height, 47 * (0.1 + 1), 0.005, 7, 500, "rgba(0, 255, 0, 0.5)", 19 ,23);
+        drawPado(pado.width, pado.height, 59 * (0.1 + 1), 0.007, 5, 500, "rgba(255, 0, 0, 0.5)", 17, 37);
+        drawPado(pado.width , pado.height, 41 * (0.1 + 1), 0.01, 11, 500, "rgba(0, 0, 255, 0.5)", 29, 31);
         frames++;
     }
 
@@ -112,12 +116,17 @@ window.onload = function(){
             padoCtx.moveTo(0, h);
             // padoCtx.lineTo(0, 300);
             // padoCtx.bezierCurveTo(300 + frames, 300, w/2 + frames, 500, w + frames,  300);
-            cycleValue = Math.sin(frames / k1);
-            cycleValue2 = Math.sin(frames / k2 * Math.PI);
+            cycleValue = Math.sin(frames / k1 / 3);
+            cycleValue2 = Math.sin(frames / k2 / 3 * Math.PI);
             for (let x = 0; x < w; x++) {
-                y = Math.sin(x * frequency - frames / 10) * amplitude * cycleValue2;
+                y = Math.sin(x * frequency - frames / 20) * amplitude * 1;
+                y = y - (10 * Math.cos(x / width * 2 * Math.PI) - 10) * slideValue;
+                //var interpolation = f(width / 2, 1);
+                //y = y * (1 + interpolation(x));
                 padoCtx.lineTo(x, y + (adjustedOffset + vibrate * cycleValue));
             }
+
+            //Math.cos(x / width * 2 * Math.PI) + 1;
 
             padoCtx.lineTo(w, h);
             padoCtx.lineTo(0, h);
@@ -127,11 +136,18 @@ window.onload = function(){
         drawPado();
     }
 
-    setInterval(drawAll, 30);
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    function f(m, p){
+        return function(x){
+            return 1 / Math.sqrt(2 * Math.PI * p * p) * Math.pow(Math.E, - Math.pow((x - m), 2) / (2 * Math.pow(p, 2)));
+        }
+    }
+
+    drawAll();
 
 })();
 
