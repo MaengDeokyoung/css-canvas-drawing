@@ -190,6 +190,23 @@ window.onload = function(){
         }
     }, false);
 
+    pado.addEventListener('mouseout', function(e){
+        isMouseDown = false;
+        if(adjustedMouseY < 0) {
+            resetUp();
+        }
+        if(adjustedMouseY > 0) {
+            resetDown();
+        }
+
+        if(adjustedMouseX < 0) {
+            resetLeft();
+        }
+        if(adjustedMouseX > 0) {
+            resetRight();
+        }
+    }, false);
+
     pado.addEventListener('touchstart', function(e){
         isMouseDown = true;
         firstX = e.touches[0].clientX;
