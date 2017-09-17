@@ -165,11 +165,10 @@ window.onload = function(){
 
     pado.addEventListener('mousemove', function(e){
         if(isMouseDown){
-            var endX = firstX - e.clientX;
+            var endX = pado.width / 2 - e.clientX;
             var endY = firstY - e.clientY;
             adjustedMouseY = - endY * 20 / (pado.height - 500);
             adjustedMouseX = - endX;
-            console.log(adjustedMouseX);
         }
     }, false);
 
@@ -188,6 +187,8 @@ window.onload = function(){
         if(adjustedMouseX > 0) {
             resetRight();
         }
+        console.log("in2")
+
     }, false);
 
     pado.addEventListener('mouseout', function(e){
@@ -205,6 +206,7 @@ window.onload = function(){
         if(adjustedMouseX > 0) {
             resetRight();
         }
+        console.log("in1")
     }, false);
 
     pado.addEventListener('touchstart', function(e){
