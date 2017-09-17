@@ -1,0 +1,16 @@
+canvas {
+
+}
+
+#round-rect {
+    position:relative;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 1000px;
+    height: 1000px;
+    overflow: hidden;
+    border-radius: 500px;
+    border: 5px #000000 solid;
+}
