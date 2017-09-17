@@ -39,10 +39,6 @@ html {
   }
 }
 
-.grid-transition {
-  transition: all 0.2s linear 0.2s;
-}
-
 .content {
   overflow: hidden;
   padding-bottom: 20px;
@@ -62,6 +58,7 @@ html {
       display:block;
       float:left;
       width: 100%;
+      transition: all 0.2s linear 0.2s;
 
       & div.item-content {
         -moz-box-shadow: 0 3px 0.5em #999999;
