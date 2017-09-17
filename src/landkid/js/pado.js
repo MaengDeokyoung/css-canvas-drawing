@@ -1,3 +1,5 @@
+var adjustedMouseX = 0.5;
+var adjustedMouseY = 0.5;
 var slideValue = 0.5;
 var slideValue1 = 0;
 var slideValue2 = 0;
@@ -47,8 +49,8 @@ window.onload = function(){
 
     $(".slider").slider({
         animate: "fast",
-        max: 20,
-        min: -20,
+        max: 3,
+        min: 0.5,
         step: 0.01
     });
 
@@ -91,9 +93,9 @@ window.onload = function(){
 
         }
 
-        drawPado(pado.width, pado.height, 47 * (0.1 + 1), 0.005, 7, 500, "rgba(0, 255, 0, 0.5)", 19 ,23);
-        drawPado(pado.width, pado.height, 59 * (0.1 + 1), 0.007, 5, 500, "rgba(255, 0, 0, 0.5)", 17, 37);
-        drawPado(pado.width , pado.height, 41 * (0.1 + 1), 0.01, 11, 500, "rgba(0, 0, 255, 0.5)", 29, 31);
+        drawPado(pado.width, pado.height, 47 * (0.1 + slideValue1), 0.005, 7, pado.height / 2, "rgba(0, 255, 0, 0.5)", 19 ,23);
+        drawPado(pado.width, pado.height, 59 * (0.1 + slideValue2), 0.007, 5, pado.height / 2, "rgba(255, 0, 0, 0.5)", 17, 37);
+        drawPado(pado.width , pado.height, 41 * (0.1 + slideValue3), 0.01, 11, pado.height / 2, "rgba(0, 0, 255, 0.5)", 29, 31);
         frames++;
     }
 
@@ -119,8 +121,8 @@ window.onload = function(){
             cycleValue = Math.sin(frames / k1 / 3);
             cycleValue2 = Math.sin(frames / k2 / 3 * Math.PI);
             for (let x = 0; x < w; x++) {
-                y = Math.sin(x * frequency - frames / 20) * amplitude * 1;
-                y = y - (10 * Math.cos(x / width * 2 * Math.PI) - 10) * slideValue;
+                y = Math.sin(x * frequency - frames / 20) * amplitude * cycleValue2 * slideValue;
+                y = y - ((x > adjustedMouseX && x < w + adjustedMouseX) ? (10 * Math.cos((x - adjustedMouseX) / width * 2 * Math.PI) - 10) * adjustedMouseY : 0);
                 //var interpolation = f(width / 2, 1);
                 //y = y * (1 + interpolation(x));
                 padoCtx.lineTo(x, y + (adjustedOffset + vibrate * cycleValue));
@@ -148,6 +150,110 @@ window.onload = function(){
     }
 
     drawAll();
+
+    var firstX = 0;
+    var firstY = 0;
+    var isMouseDown = false;
+
+    pado.addEventListener('mousedown', function(e){
+        isMouseDown = true;
+        firstX = e.clientX;
+        firstY = e.clientY;
+        cancelAnimationFrame(resetUp);
+        cancelAnimationFrame(resetDown);
+    }, false);
+
+    pado.addEventListener('mousemove', function(e){
+        if(isMouseDown){
+            var endX = firstX - e.clientX;
+            var endY = firstY - e.clientY;
+            adjustedMouseY = - endY * 20 / (pado.height - 500);
+            adjustedMouseX = - endX;
+            console.log(adjustedMouseX);
+        }
+    }, false);
+
+    pado.addEventListener('mouseup', function(e){
+        isMouseDown = false;
+        if(adjustedMouseY < 0) {
+            resetUp();
+        }
+        if(adjustedMouseY > 0) {
+            resetDown();
+        }
+
+        if(adjustedMouseX < 0) {
+            resetLeft();
+        }
+        if(adjustedMouseX > 0) {
+            resetRight();
+        }
+    }, false);
+
+    pado.addEventListener('touchstart', function(e){
+        isMouseDown = true;
+        firstX = e.touches[0].clientX;
+        firstY = e.touches[0].clientY;
+        cancelAnimationFrame(resetUp);
+        cancelAnimationFrame(resetDown);
+    }, false);
+
+    pado.addEventListener('touchmove', function(e){
+        if(isMouseDown){
+            var endX = firstX - e.touches[0].clientX;
+            var endY = firstY - e.touches[0].clientY;
+            adjustedMouseY = - endY * 40 / (pado.height - 500);
+            adjustedMouseX = - endX;
+            console.log(adjustedMouseX);
+        }
+    }, false);
+
+    pado.addEventListener('touchend', function(e){
+        isMouseDown = false;
+        if(adjustedMouseY < 0) {
+            resetUp();
+        }
+        if(adjustedMouseY > 0) {
+            resetDown();
+        }
+
+        if(adjustedMouseX < 0) {
+            resetLeft();
+        }
+        if(adjustedMouseX > 0) {
+            resetRight();
+        }
+    }, false);
+
+
+    function resetUp(){
+        if(adjustedMouseY < 0) {
+            requestAnimationFrame(resetUp);
+            adjustedMouseY++;
+        }
+    }
+
+    function resetDown(){
+        if(adjustedMouseY > 0) {
+            requestAnimationFrame(resetDown);
+            adjustedMouseY--;
+        }
+    }
+
+    function resetLeft(){
+        if(adjustedMouseX < 0) {
+            requestAnimationFrame(resetLeft);
+            adjustedMouseX += 10;
+        }
+    }
+
+    function resetRight(){
+        if(adjustedMouseX > 0) {
+            requestAnimationFrame(resetRight);
+            adjustedMouseX-= 10;
+        }
+    }
+
 
 })();
 
