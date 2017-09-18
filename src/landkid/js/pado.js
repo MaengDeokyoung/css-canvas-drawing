@@ -37,6 +37,9 @@ window.onload = function(){
     };
 
     var soundNotAllowed = function (error) {
+        slideValue1 = .9;
+        slideValue2 = .9;
+        slideValue3 = .9;
         console.log(error);
     };
 

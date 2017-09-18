@@ -13,6 +13,7 @@
   padding: 15px;
 }
 html {
+  font-size: 20px;
   font-family: "Lucida Sans", sans-serif;
 }
 .header {
@@ -70,8 +71,8 @@ html {
         -moz-border-radius: 5px;
         border-radius: 5px;
         height:100%;
+        font-size: 1rem;
         & p.title {
-          font-size: 26px;
           font-weight: bold;
           margin-bottom: 20px;
         }
@@ -144,7 +145,7 @@ html {
   }
 }
 
-@media only screen and (min-width: 480px) {
+/*@media only screen and (min-width: 480px) {
   .content ul li.content-list-item {
     width: 50%;
   }
@@ -152,79 +153,79 @@ html {
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
-  .col-1 {
-    width: 8.33%;
-  }
-  .col-2 {
-    width: 16.66%;
-  }
-  .col-3 {
-    width: 25%;
-    &.menu {
-      display:block;
-      position:inherit;
-    }
-  }
-  .col-4 {
-    width: 33.33%;
-  }
-  .col-5 {
-    width: 41.66%;
-  }
-  .col-6 {
-    width: 50%;
-  }
-  .col-7 {
-    width: 58.33%;
-  }
-  .col-8 {
-    width: 66.66%;
-  }
-  .col-9 {
-    width: 75%;
-  }
-  .col-10 {
-    width: 83.33%;
-  }
-  .col-11 {
-    width: 91.66%;
-  }
-  .col-12 {
-    width: 100%;
-  }
-  .col-3.menu {
+/*.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+  &.menu {
     display:block;
     position:inherit;
   }
-  .header {
-    position: relative;
-    & > .menu-btn {
-      display: none;
-    }
-  }
-
-  .row {
-    padding-top: 0;
-
-    &::after {
-      content:' ';
-      display: block;
-      clear:both;
-    }
-
-    & > .col-3.menu {
-      display: block;
-      position: inherit;
-      visibility: visible;
-      opacity: 1;
-      border: none;
-      -webkit-transition: none;
-      transition: none;
-      -ms-transform: translate(0,0);
-      transform: translate(0,0);
-    }
-  }
-  .content ul li.content-list-item {
-    width: 33%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+.col-3.menu {
+  display:block;
+  position:inherit;
+}
+.header {
+  position: relative;
+  & > .menu-btn {
+    display: none;
   }
 }
+
+.row {
+  padding-top: 0;
+
+  &::after {
+    content:' ';
+    display: block;
+    clear:both;
+  }
+
+  & > .col-3.menu {
+    display: block;
+    position: inherit;
+    visibility: visible;
+    opacity: 1;
+    border: none;
+    -webkit-transition: none;
+    transition: none;
+    -ms-transform: translate(0,0);
+    transform: translate(0,0);
+  }
+}
+.content ul li.content-list-item {
+  width: 33%;
+}
+}*/
