@@ -1,9 +1,11 @@
 canvas {
     display: block;
+    position: absolute;
+
 }
 
 body {
-    background-color: black;
+    background-color: #222;
     overflow: hidden;
     position: relative;
 }
