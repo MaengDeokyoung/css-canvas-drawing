@@ -24,12 +24,12 @@ window.onload = function(){
         var draw = function() {
             requestAnimationFrame(draw);
             analyser.getByteFrequencyData(frequencyArray);
-            // slideValue1 = frequencyArray[0] / 100;
-            // slideValue2 = frequencyArray[3] / 100;
-            // slideValue3 = frequencyArray[5] / 100;
-            slideValue1 = .9;
-            slideValue2 = .9;
-            slideValue3 = .9;
+            slideValue1 = frequencyArray[0] / 100;
+            slideValue2 = frequencyArray[1] / 100;
+            slideValue3 = frequencyArray[2] / 100;
+            // slideValue1 = .9;
+            // slideValue2 = .9;
+            // slideValue3 = .9;
 
         };
         draw();
@@ -69,11 +69,16 @@ window.onload = function(){
     const pado = document.getElementById('pado'),
         padoCtx = pado.getContext('2d');
 
+    const moon = document.getElementById('moon'),
+        moonCtx = pado.getContext('2d');
+
     window.addEventListener('resize', fitToWindowSize, false);
 
     function fitToWindowSize(){
         pado.width = window.innerWidth;
         pado.height = window.innerHeight;
+        moon.width = window.innerWidth;
+        moon.height = window.innerHeight;
     }
     fitToWindowSize();
 
@@ -83,23 +88,62 @@ window.onload = function(){
     var amplitude2;
     var amplitude3;
 
+    var randomX = getRandomInt(0, moon.width);
+    var randomY = getRandomInt(0, pado.height * 3 / 4);
+    var randomRd = getRandomInt(2, 5);
+
+    var random = {
+        randomX: [],
+        randomY: [],
+        randomRd: []
+    }
+
+    for(var i = 0 ; i < 200 ; i++){
+        random.randomX.push(getRandomInt(0, moon.width));
+        random.randomY.push(getRandomInt(0, pado.height));
+        random.randomRd.push(getRandomInt(2, 3));
+    }
+
     function drawAll() {
         requestAnimationFrame(drawAll);
 
         padoCtx.clearRect(0, 0, pado.width, pado.height);
+        moonCtx.clearRect(0, 0, moon.width, moon.height);
 
         if(frames % 120 === 0) {
             amplitude1 = getRandomInt(30, 60);
             amplitude2 = getRandomInt(30, 60);
             amplitude3 = getRandomInt(30, 60);
+
+
         } else {
 
         }
+        drawMoon();
 
-        drawPado(pado.width, pado.height, 47 * (0.1 + slideValue1), 0.005, 7, pado.height / 2, "rgba(0, 255, 0, 0.5)", 19 ,23);
-        drawPado(pado.width, pado.height, 59 * (0.1 + slideValue2), 0.007, 5, pado.height / 2, "rgba(255, 0, 0, 0.5)", 17, 37);
-        drawPado(pado.width , pado.height, 41 * (0.1 + slideValue3), 0.01, 11, pado.height / 2, "rgba(0, 0, 255, 0.5)", 29, 31);
+        for(var i = 0 ; i < 200 ; i++){
+            drawStar(random.randomX[i] + Math.cos(frames / 40), random.randomY[i] + Math.sin(frames / 40), random.randomRd[i]);
+        }
+
+        drawPado(pado.width, pado.height, 47 * (0.1 + slideValue1), 0.005, 7, pado.height * 3 / 4, "rgba(0, 255, 0, 0.5     )", 19 ,23);
+        drawPado(pado.width, pado.height, 59 * (0.1 + slideValue2), 0.007, 5, pado.height * 3 / 4, "rgba(255, 0, 0, 0.5)", 17, 37);
+        drawPado(pado.width , pado.height, 41 * (0.1 + slideValue3), 0.01, 11, pado.height * 3 / 4, "rgba(0, 0, 255, 0.5)", 29, 31);
         frames++;
+    }
+
+    function drawMoon(){
+        moonCtx.beginPath();
+        moonCtx.arc(moon.width / 2 + Math.cos(frames / 1500) * (moon.width / 2 - 200), 200 + Math.cos(frames / 40) * 5, 100, 0, 2 * Math.PI, false);
+        moonCtx.fillStyle = "hsl(60, " + (80 + Math.cos(frames / 23 ) * 7) + "%, " + (87 + Math.sin(frames / 53) * 3) +"%)";
+        moon.style.webkitFilter = "blur(1px)";
+        moonCtx.fill();
+    }
+
+    function drawStar(x, y, radius){
+        moonCtx.beginPath();
+        moonCtx.arc(x, y, radius, 0, 2 * Math.PI, false);
+        moonCtx.fillStyle = "hsl(60, " + (80 + Math.cos(frames / 10) * 7) + "%, " + (87 + Math.sin(frames / 20) * 3) +"%)";
+        moonCtx.fill();
     }
 
     function drawPado(width, height, amplitude, frequency, vibrate, offset, color, k1, k2) {
