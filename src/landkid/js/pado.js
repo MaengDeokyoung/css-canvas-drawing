@@ -5,47 +5,47 @@ var slideValue1 = 0;
 var slideValue2 = 0;
 var slideValue3 = 0;
 
-window.onload = function(){
-    "use strict";
-
-    var soundAllowed = function (stream) {
-        //Audio stops listening in FF without // window.persistAudioStream = stream;
-        //https://bugzilla.mozilla.org/show_bug.cgi?id=965483
-        //https://support.mozilla.org/en-US/questions/984179
-        window.persistAudioStream = stream;
-        var audioContent = new AudioContext();
-        var audioStream = audioContent.createMediaStreamSource( stream );
-        var analyser = audioContent.createAnalyser();
-        audioStream.connect(analyser);
-        analyser.fftSize = 32;
-
-        var frequencyArray = new Uint8Array(analyser.frequencyBinCount);
-
-        var draw = function() {
-            requestAnimationFrame(draw);
-            analyser.getByteFrequencyData(frequencyArray);
-            // slideValue1 = frequencyArray[0] / 100;
-            // slideValue2 = frequencyArray[1] / 100;
-            // slideValue3 = frequencyArray[2] / 100;
-            slideValue1 = .9;
-            slideValue2 = .9;
-            slideValue3 = .9;
-
-        };
-        draw();
-
-    };
-
-    var soundNotAllowed = function (error) {
-        slideValue1 = .9;
-        slideValue2 = .9;
-        slideValue3 = .9;
-        console.log(error);
-    };
-
-    navigator.getUserMedia({audio:true}, soundAllowed, soundNotAllowed);
-
-};
+// window.onload = function(){
+//     "use strict";
+//
+//     var soundAllowed = function (stream) {
+//         //Audio stops listening in FF without // window.persistAudioStream = stream;
+//         //https://bugzilla.mozilla.org/show_bug.cgi?id=965483
+//         //https://support.mozilla.org/en-US/questions/984179
+//         window.persistAudioStream = stream;
+//         var audioContent = new AudioContext();
+//         var audioStream = audioContent.createMediaStreamSource( stream );
+//         var analyser = audioContent.createAnalyser();
+//         audioStream.connect(analyser);
+//         analyser.fftSize = 32;
+//
+//         var frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+//
+//         var draw = function() {
+//             requestAnimationFrame(draw);
+//             analyser.getByteFrequencyData(frequencyArray);
+//             // slideValue1 = frequencyArray[0] / 100;
+//             // slideValue2 = frequencyArray[1] / 100;
+//             // slideValue3 = frequencyArray[2] / 100;
+//             slideValue1 = .9;
+//             slideValue2 = .9;
+//             slideValue3 = .9;
+//
+//         };
+//         draw();
+//
+//     };
+//
+//     var soundNotAllowed = function (error) {
+//         slideValue1 = .9;
+//         slideValue2 = .9;
+//         slideValue3 = .9;
+//         console.log(error);
+//     };
+//
+//     navigator.getUserMedia({audio:true}, soundAllowed, soundNotAllowed);
+//
+// };
 
 slideValue1 = .9;
 slideValue2 = .9;
