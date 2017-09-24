@@ -7,7 +7,7 @@
     var fontSize = typoEl.width / 8 + "px";
     var fontFamily = "Verdana";
     var text = "LOVE";
-    var texts = ["LOVE", "HOPE", "ENTHUSIASM", "FEELING"]
+    var texts = ["HELLO", "MY", "NAME IS", "LANDKID", "ARE", "YOU", "READY?"]
 
     function fitToWindowSize(){
         typoEl.width = window.innerWidth;
@@ -35,8 +35,8 @@
         .setEndListener(function(){})
         .setStartDelay(400)
         .setInterpolator(standardInterpolator)
-        .setDuration(300)
-        .setRepeatCount(2);
+        .setDuration(200)
+        .setRepeatCount(1);
 
     var anim3 = new AnimationUtil()
         .addTarget(drawText)
@@ -45,16 +45,25 @@
         .setStartDelay(1400)
         .setDuration(1000);
 
-    function animate(t){
-        text = t;
+    var index = 0;
+    var intervalId;
+
+    function animate(){
+        text = texts[index];
+        index++;
         anim1.setEndListener(function(){
             anim2.setEndListener(function (){
                 anim3.setEndListener(function(){
-                    //window.location.replace("pado.html");
+                    if(index >= texts.length){
 
+                    }
                 }).reverse();
             }).start();
         }).start();
+        if(index >= texts.length){
+            clearInterval(intervalId);
+        }
+
     }
 
     function drawText(animatedValue){
@@ -142,12 +151,11 @@
         ctx.shadowBlur = 15;
         ctx.fillText(text, typoEl.width / 2, typoEl.height / 2);
     }
-    var index = 0;
     typoEl.addEventListener("click", function(e){
         if(!anim1.isRunning && !anim2.isRunning && !anim3.isRunning) {
             if (index < texts.length) {
-                animate(texts[index]);
-                index++;
+                animate();
+                intervalId = setInterval(animate, 4000);
             }
         }
     }, false);
