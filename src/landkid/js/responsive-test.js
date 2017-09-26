@@ -70,13 +70,14 @@ if (matchMedia) {
 // media query change
 function WidthChange(mq1) {
     if (mq1.matches) {
-        toggle();
+        //toggle();
     } else {
+
     }
 
 }
 
-function toggle(){
+function toggle(e){
     const mq = window.matchMedia("(min-width: 768px)");
 
     if(!mq.matches){
@@ -101,6 +102,15 @@ function toggle(){
 
         });
     }
+    e.preventDefault();
 }
 
-OPUS.select('.menu-btn').on("click", toggle);
+// OPUS.select('.header h1').execute(function(object){
+//     object.innerHTML = navigator.userAgent;
+// });
+
+if (/Mobi/i.test(navigator.userAgent) || /Android/i.test(navigator.userAgent)) {
+    OPUS.select('.menu-btn').on("touchstart", toggle, false);
+} else {
+    OPUS.select('.menu-btn').on("click", toggle, false);
+}

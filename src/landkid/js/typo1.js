@@ -7,7 +7,7 @@
     var fontSize = typoEl.width / 8 + "px";
     var fontFamily = "Verdana";
     var text = "LOVE";
-    var texts = ["HELLO", "MY", "NAME IS", "LANDKID", "ARE", "YOU", "READY?"]
+    var texts = ["HELLO!", "ARE", "YOU", "READY?", "5", "4", "3", "2", "1", "GO!!"];
 
     function fitToWindowSize(){
         typoEl.width = window.innerWidth;
@@ -28,41 +28,81 @@
     var anim1 = new AnimationUtil()
         .addTarget(drawText)
         .setInterpolator(standardInterpolator)
-        .setDuration(1000);
 
     var anim2 = new AnimationUtil()
         .addTarget(drawText2)
         .setEndListener(function(){})
-        .setStartDelay(400)
         .setInterpolator(standardInterpolator)
-        .setDuration(200)
         .setRepeatCount(1);
 
     var anim3 = new AnimationUtil()
         .addTarget(drawText)
         .setInterpolator(standardInterpolator)
-        .setEndListener(function(){})
-        .setStartDelay(1400)
-        .setDuration(1000);
+        .setEndListener(function(){});
 
     var index = 0;
     var intervalId;
 
     function animate(){
         text = texts[index];
-        index++;
-        anim1.setEndListener(function(){
-            anim2.setEndListener(function (){
+        // anim1.setEndListener(function(){
+        //     anim2.setEndListener(function (){
+        //         anim3.setEndListener(function(){
+        //             if(index >= texts.length){
+        //
+        //             }
+        //         }).reverse();
+        //     }).start();
+        // }).start();
+
+        if(index >= texts.length){
+            clearInterval(intervalId);
+        }
+        if(index === 0){
+            intervalId = setInterval(animate, 4000);
+        }
+        if(index === 4){
+            clearInterval(intervalId);
+            intervalId = setInterval(animate, 1000);
+        }
+        if(index === 9){
+            clearInterval(intervalId);
+            intervalId = setInterval(animate, 6000);
+        }
+        if(index <= 3){
+            anim1.setEndListener(function(){
+                anim2.setEndListener(function (){
+                    anim3.setEndListener(function(){
+                        if(index >= texts.length){
+
+                        }
+                    }).setStartDelay(1400).setDuration(1000).reverse();
+                }).setStartDelay(400).setDuration(200).setRepeatCount(1).start();
+            }).setStartDelay(0).setDuration(1000).start();
+        } else if(index <= 8){
+            anim1.setEndListener(function(){
                 anim3.setEndListener(function(){
                     if(index >= texts.length){
 
                     }
-                }).reverse();
-            }).start();
-        }).start();
-        if(index >= texts.length){
-            clearInterval(intervalId);
+                }).setStartDelay(0).setDuration(500).reverse();
+            }).setStartDelay(0).setDuration(500).start();
+
+        } else {
+            anim1.setEndListener(function(){
+                anim2.setEndListener(function (){
+                    anim3.setEndListener(function(){
+                        if(index >= texts.length){
+                            clearInterval(intervalId);
+                            index = 0;
+                        }
+                    }).setStartDelay(3000).setDuration(500).reverse();
+                }).setStartDelay(200).setDuration(200).setRepeatCount(3).start();
+            }).setStartDelay(0).setDuration(1000).start();
         }
+
+        index++;
+
 
     }
 
@@ -155,7 +195,6 @@
         if(!anim1.isRunning && !anim2.isRunning && !anim3.isRunning) {
             if (index < texts.length) {
                 animate();
-                intervalId = setInterval(animate, 4000);
             }
         }
     }, false);
