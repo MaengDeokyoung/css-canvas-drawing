@@ -9,6 +9,9 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently */
 }
+a {
+    text-decoration: none;
+}
 
 [class*="col-"] {
     float: left;
@@ -117,18 +120,24 @@
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
         & li {
-            width: 30px;
-            border-radius: 0.25em;
-            padding-left: 0.5em;
-            padding-right: 0.25em;
-            line-height: 2em;
-            font-size: 1.25em;
-            margin-bottom: 0.0625em;
-            margin-top: 0.0625em;
             list-style: none;
-            background-color: #2b2b2b;
-            opacity: 0.8;
-            color: #fff;
+
+            & a {
+                display: block;
+                cursor: hand;
+                width: 30px;
+                border-radius: 0.25em;
+                padding-left: 0.5em;
+                padding-right: 0.25em;
+                line-height: 2em;
+                font-size: 1.25em;
+                margin-bottom: 0.0625em;
+                margin-top: 0.0625em;
+                background-color: #2b2b2b;
+                opacity: 0.8;
+                color: #fff;
+
+            }
         }
     }
 }
