@@ -102,8 +102,6 @@
         }
 
         index++;
-
-
     }
 
     function drawText(animatedValue){

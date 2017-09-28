@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/normalize.css"/>
+    <link rel="stylesheet" href="../css/grid.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="col-12 content-title">Contents1</div>
+
+    <div class="col-1">column</div>
+    <div class="col-11">column</div>
+
+    <div class="col-2">column</div>
+    <div class="col-10">column</div>
+
+    <div class="col-3">column</div>
+    <div class="col-9">column</div>
+
+    <div class="col-4">column</div>
+    <div class="col-8">column</div>
+
+    <div class="col-5">column</div>
+    <div class="col-7">column</div>
+
+    <div class="col-6">column</div>
+    <div class="col-6">column</div>
+</div>
+
+<div class="container">
+
+    <div class="col-12 content-title">Contents2</div>
+    <div class="col-7">column</div>
+    <div class="col-5">column</div>
+
+    <div class="col-8">column</div>
+    <div class="col-4">column</div>
+
+    <div class="col-9">column</div>
+    <div class="col-3">column</div>
+
+    <div class="col-10">column</div>
+    <div class="col-2">column</div>
+
+    <div class="col-11">column</div>
+    <div class="col-1">column</div>
+
+    <div class="col-4">column</div>
+    <div class="col-4">column</div>
+    <div class="col-4">column</div>
+</div>
+<div class="container">
+
+    <div class="col-12 content-title ">Contents3</div>
+
+    <div class="col-3">column</div>
+    <div class="col-3">column</div>
+    <div class="col-3">column</div>
+    <div class="col-3">column</div>
+
+    <div class="col-2">column</div>
+    <div class="col-2">column</div>
+    <div class="col-2">column</div>
+    <div class="col-2">column</div>
+    <div class="col-2">column</div>
+    <div class="col-2">column</div>
+
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+    <div class="col-1">column</div>
+</div>
+
+<script type="text/javascript">
+
+    (function(){
+
+        function getComponentHeight(element){
+            var paddingTop,
+                paddingBottom,
+                marginTop,
+                marginBottom,
+                height,
+                adjustedHeight;
+
+            var style = getComputedStyle(element);
+
+            paddingTop = parseInt(style.paddingTop);
+            paddingBottom = parseInt(style.paddingBottom);
+            marginTop = parseInt(style.marginTop);
+            marginBottom = parseInt(style.marginBottom);
+            height = parseInt(style.height);
+
+            return paddingTop + paddingBottom + marginTop + marginBottom + height;
+        }
+
+        var containers = document.getElementsByClassName('container');
+
+        document.getElementsByClassName('content-title');
+
+
+        if (matchMedia) {
+            var mq1 = window.matchMedia("(min-width: 320px) and (max-width: 767px)");
+            var mq2 = window.matchMedia("(min-width: 768px) and (max-width: 1279px)");
+            var mq3 = window.matchMedia("(min-width: 1280px)");
+            mq1.addListener(WidthChange);
+            mq2.addListener(WidthChange);
+            mq3.addListener(WidthChange);
+        }
+
+        function WidthChange(mq) {
+
+            var currentContent = 0;
+
+            if (containers !== undefined && containers.length > 0) {
+                var scrollY = window.scrollY;
+                var sum = 0;
+
+                for (var i = 0; i < containers.length; i++) {
+                    sum += getComponentHeight(containers[i]);
+                    if (sum > scrollY + window.innerHeight / 2) {
+                        currentContent = i;
+                        break;
+                    }
+                }
+            }
+
+            setTimeout(function () {
+                var contentHeight = 0;
+                for (var i = 0; i <= currentContent; i++) {
+                    contentHeight +=  getComponentHeight(containers[i]);
+                }
+
+                //window.scrollTo(0, contentHeight -  getComponentHeight(containers[currentContent]));
+
+                smoothScrollTo(0, contentHeight - getComponentHeight(containers[currentContent]));
+
+            }, 300);
+        }
+
+        function smoothScrollTo(x, y){
+
+            var totalContentHeight = 0;
+            for (var i = 0; i < containers.length; i++) {
+                totalContentHeight += getComponentHeight(containers[i]);
+            }
+            var canScrollY = totalContentHeight - window.innerHeight;
+            var currentScrollY = window.scrollY;
+            var targetScrollY = y > canScrollY ? canScrollY : y;
+            targetScrollY = targetScrollY < 0 ? 0 : targetScrollY;
+
+            if(window.scrollY < targetScrollY) {
+                if (window.scrollY + 30 < targetScrollY) {
+                    window.scrollTo(0, currentScrollY + 30);
+                    requestAnimationFrame(function(){
+                        smoothScrollTo(x, targetScrollY);
+                    });
+                } else {
+                    window.scrollTo(0, targetScrollY);
+                }
+            } else if(window.scrollY > targetScrollY) {
+                if (window.scrollY - 30 > targetScrollY) {
+                    window.scrollTo(0, currentScrollY - 30);
+                    requestAnimationFrame(function(){
+                        smoothScrollTo(x, targetScrollY);
+                    });
+                } else {
+                    window.scrollTo(0, targetScrollY);
+                }
+            } else {
+
+            }
+
+        }
+
+        window.containers = containers;
+
+    })();
+</script>
+</body>
+</html>
