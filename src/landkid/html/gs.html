@@ -10,9 +10,9 @@
 <body>
 
 <ul class="scroll-navi">
-    <li>Content 1</li>
-    <li>Content 2</li>
-    <li>Content 3</li>
+    <li>C1</li>
+    <li>C2</li>
+    <li>C3</li>
 </ul>
 
 <div class="container">
@@ -168,6 +168,7 @@
                     (function(i, targetScrollY) {
                         scrollNavi[i].addEventListener('click', function (e) {
                             smoothScrollTo(0, targetScrollY);
+                            e.preventDefault();
                         }, false);
                     })(i, targetScrollY);
                 }
