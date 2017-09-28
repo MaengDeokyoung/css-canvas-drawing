@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../css/normalize.css"/>
     <link rel="stylesheet" href="../css/grid.css"/>
 </head>
 <body>
+
+<ul class="scroll-navi">
+    <li>Content 1</li>
+    <li>Content 2</li>
+    <li>Content 3</li>
+</ul>
+
 <div class="container">
     <div class="col-12 content-title">Contents1</div>
 
@@ -108,17 +116,18 @@
 
         document.getElementsByClassName('content-title');
 
-
+        var mq1, mq2, mq3;
         if (matchMedia) {
-            var mq1 = window.matchMedia("(min-width: 320px) and (max-width: 767px)");
-            var mq2 = window.matchMedia("(min-width: 768px) and (max-width: 1279px)");
-            var mq3 = window.matchMedia("(min-width: 1280px)");
+            mq1 = window.matchMedia("(min-width: 320px) and (max-width: 767px)");
+            mq2 = window.matchMedia("(min-width: 768px) and (max-width: 1279px)");
+            mq3 = window.matchMedia("(min-width: 1280px)");
             mq1.addListener(WidthChange);
             mq2.addListener(WidthChange);
             mq3.addListener(WidthChange);
+            WidthChange();
         }
 
-        function WidthChange(mq) {
+        function WidthChange() {
 
             var currentContent = 0;
 
@@ -146,9 +155,30 @@
                 smoothScrollTo(0, contentHeight - getComponentHeight(containers[currentContent]));
 
             }, 300);
+
+            if(mq1.matches){
+                var scrollNavi = document.querySelectorAll(".scroll-navi li");
+                var targetScrollY = 0;
+                for(var i = 0 ; i < scrollNavi.length ; i++){
+                    if(i === 0){
+                        targetScrollY = 0;
+                    } else {
+                        targetScrollY += getComponentHeight(containers[i - 1]);
+                    }
+                    (function(i, targetScrollY) {
+                        scrollNavi[i].addEventListener('click', function (e) {
+                            smoothScrollTo(0, targetScrollY);
+                        }, false);
+                    })(i, targetScrollY);
+                }
+            }
         }
 
-        function smoothScrollTo(x, y){
+        function smoothScrollTo(x, y, speed){
+
+            if(speed === undefined){
+                speed = Math.abs((y - window.scrollY) / 20);
+            }
 
             var totalContentHeight = 0;
             for (var i = 0; i < containers.length; i++) {
@@ -160,30 +190,28 @@
             targetScrollY = targetScrollY < 0 ? 0 : targetScrollY;
 
             if(window.scrollY < targetScrollY) {
-                if (window.scrollY + 30 < targetScrollY) {
-                    window.scrollTo(0, currentScrollY + 30);
+                if (window.scrollY + speed < targetScrollY) {
+                    window.scrollTo(x, currentScrollY + speed);
                     requestAnimationFrame(function(){
-                        smoothScrollTo(x, targetScrollY);
+                        smoothScrollTo(x, targetScrollY, speed);
                     });
                 } else {
-                    window.scrollTo(0, targetScrollY);
+                    window.scrollTo(x, targetScrollY);
                 }
             } else if(window.scrollY > targetScrollY) {
-                if (window.scrollY - 30 > targetScrollY) {
-                    window.scrollTo(0, currentScrollY - 30);
+                if (window.scrollY - speed > targetScrollY) {
+                    window.scrollTo(0, currentScrollY - speed);
                     requestAnimationFrame(function(){
-                        smoothScrollTo(x, targetScrollY);
+                        smoothScrollTo(x, targetScrollY, speed);
                     });
                 } else {
-                    window.scrollTo(0, targetScrollY);
+                    window.scrollTo(x, targetScrollY);
                 }
             } else {
 
             }
 
         }
-
-        window.containers = containers;
 
     })();
 </script>
