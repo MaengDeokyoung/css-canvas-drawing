@@ -25,17 +25,17 @@
         return Math.sin(t * Math.PI / 2);
     };
 
-    var anim1 = new AnimationUtil()
+    var anim1 = AnimationUtil()
         .addTarget(drawText)
         .setInterpolator(standardInterpolator)
 
-    var anim2 = new AnimationUtil()
+    var anim2 = AnimationUtil()
         .addTarget(drawText2)
         .setEndListener(function(){})
         .setInterpolator(standardInterpolator)
         .setRepeatCount(1);
 
-    var anim3 = new AnimationUtil()
+    var anim3 = AnimationUtil()
         .addTarget(drawText)
         .setInterpolator(standardInterpolator)
         .setEndListener(function(){});
@@ -45,15 +45,6 @@
 
     function animate(){
         text = texts[index];
-        // anim1.setEndListener(function(){
-        //     anim2.setEndListener(function (){
-        //         anim3.setEndListener(function(){
-        //             if(index >= texts.length){
-        //
-        //             }
-        //         }).reverse();
-        //     }).start();
-        // }).start();
 
         if(index >= texts.length){
             clearInterval(intervalId);
@@ -96,8 +87,8 @@
                             clearInterval(intervalId);
                             index = 0;
                         }
-                    }).setStartDelay(3000).setDuration(500).reverse();
-                }).setStartDelay(200).setDuration(200).setRepeatCount(3).start();
+                    }).setStartDelay(8000).setDuration(500).reverse();
+                }).setStartDelay(200).setDuration(200).setRepeatCount(10).start();
             }).setStartDelay(0).setDuration(1000).start();
         }
 

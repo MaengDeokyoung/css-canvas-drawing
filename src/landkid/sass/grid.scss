@@ -18,6 +18,10 @@ a {
     float: left;
 }
 
+html {
+    transition: scroll 0.3s ease-in-out;
+}
+
 .container {
     width: 100%;
     height: auto;

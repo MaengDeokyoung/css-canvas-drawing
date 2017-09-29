@@ -131,6 +131,11 @@ slideValue3 = .9;
         drawPado(pado.width, pado.height, 47 * (0.1 + slideValue1), 0.005, 7, pado.height * 3 / 4, "rgba(17, 147, 173, 0.5)", 19 ,23);
         drawPado(pado.width, pado.height, 59 * (0.1 + slideValue2), 0.007, 5, pado.height * 3 / 4, "rgba(103, 199, 234, 0.5)", 17, 37);
         drawPado(pado.width , pado.height, 41 * (0.1 + slideValue3), 0.01, 11, pado.height * 3 / 4, "rgba(77, 224, 204, 0.5)", 29, 31);
+
+        // drawPado(pado.width, pado.height, 47 * (0.1 + slideValue1), 0.005, 7, pado.height * 1 / 4, "rgba(139, 249, 171, 0.8)", 19 ,23);
+        // drawPado(pado.width, pado.height, 59 * (0.1 + slideValue2), 0.007, 5, pado.height * 1 / 4, "rgba(103, 199, 234, 0.8)", 17, 37);
+        // drawPado(pado.width , pado.height, 41 * (0.1 + slideValue3), 0.01, 11, pado.height * 1 / 4, "rgba(212, 66, 244, 0.8)", 29, 31);
+        // drawPado(pado.width , pado.height, 33 * (0.1 + slideValue3), 0.013  , 11, pado.height * 1 / 4, "rgba(0, 0, 0, 1)", 29, 31);
         frames++;
     }
 
