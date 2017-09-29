@@ -89,11 +89,59 @@
     <div class="col-1">column</div>
 </div>
 
+<table class="container">
+    <thead>
+        <tr class="col-12 table-header">
+            <th class="col-2">H1</th>
+            <th class="col-2">H2</th>
+            <th class="col-2">H3</th>
+            <th class="col-2">H4</th>
+            <th class="col-2">H5</th>
+            <th class="col-2">H6</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="col-12 table-row">
+            <td class="col-2"><span class="label">H1:</span><span>row 1</span></td>
+            <td class="col-2"><span class="label">H2:</span><span>row 2</span></td>
+            <td class="col-2"><span class="label">H3:</span><span>row 3</span></td>
+            <td class="col-2"><span class="label">H4:</span><span>row 4</span></td>
+            <td class="col-2"><span class="label">H5:</span><span>row 5</span></td>
+            <td class="col-2"><span class="label">H6:</span><span>row 6</span></td>
+        </tr>
+        <tr class="col-12 table-row">
+            <td class="col-2"><span class="label">H1:</span><span>row 1</span></td>
+            <td class="col-2"><span class="label">H2:</span><span>row 2</span></td>
+            <td class="col-2"><span class="label">H3:</span><span>row 3</span></td>
+            <td class="col-2"><span class="label">H4:</span><span>row 4</span></td>
+            <td class="col-2"><span class="label">H5:</span><span>row 5</span></td>
+            <td class="col-2"><span class="label">H6:</span><span>row 6</span></td>
+        </tr>
+        <tr class="col-12 table-row">
+            <td class="col-2"><span class="label">H1:</span><span>row 1</span></td>
+            <td class="col-2"><span class="label">H2:</span><span>row 2</span></td>
+            <td class="col-2"><span class="label">H3:</span><span>row 3</span></td>
+            <td class="col-2"><span class="label">H4:</span><span>row 4</span></td>
+            <td class="col-2"><span class="label">H5:</span><span>row 5</span></td>
+            <td class="col-2"><span class="label">H6:</span><span>row 6</span></td>
+        </tr>
+        <tr class="col-12 table-row">
+            <td class="col-2"><span class="label">H1:</span><span>row 1</span></td>
+            <td class="col-2"><span class="label">H2:</span><span>row 2</span></td>
+            <td class="col-2"><span class="label">H3:</span><span>row 3</span></td>
+            <td class="col-2"><span class="label">H4:</span><span>row 4</span></td>
+            <td class="col-2"><span class="label">H5:</span><span>row 5</span></td>
+            <td class="col-2"><span class="label">H6:</span><span>row 6</span></td>
+        </tr>
+    </tbody>
+
+</table>
+
 <script type="text/javascript">
 
-    (function(){
+    (function () {
 
-        function getComponentHeight(element){
+        function getComponentHeight(element) {
             var paddingTop,
                 paddingBottom,
                 marginTop,
@@ -147,25 +195,23 @@
             setTimeout(function () {
                 var contentHeight = 0;
                 for (var i = 0; i <= currentContent; i++) {
-                    contentHeight +=  getComponentHeight(containers[i]);
+                    contentHeight += getComponentHeight(containers[i]);
                 }
-
-                //window.scrollTo(0, contentHeight -  getComponentHeight(containers[currentContent]));
 
                 smoothScrollTo(0, contentHeight - getComponentHeight(containers[currentContent]));
 
             }, 300);
 
-            if(mq1.matches){
+            if (mq1.matches) {
                 var scrollNavi = document.querySelectorAll(".scroll-navi li");
                 var targetScrollY = 0;
-                for(var i = 0 ; i < scrollNavi.length ; i++){
-                    if(i === 0){
+                for (var i = 0; i < scrollNavi.length; i++) {
+                    if (i === 0) {
                         targetScrollY = 0;
                     } else {
                         targetScrollY += getComponentHeight(containers[i - 1]);
                     }
-                    (function(i, targetScrollY) {
+                    (function (i, targetScrollY) {
                         scrollNavi[i].addEventListener('click', function (e) {
                             smoothScrollTo(0, targetScrollY);
                             e.preventDefault();
@@ -175,9 +221,9 @@
             }
         }
 
-        function smoothScrollTo(x, y, speed){
+        function smoothScrollTo(x, y, speed) {
 
-            if(speed === undefined){
+            if (speed === undefined) {
                 speed = Math.abs((y - window.scrollY) / 20);
             }
 
@@ -190,19 +236,19 @@
             var targetScrollY = y > canScrollY ? canScrollY : y;
             targetScrollY = targetScrollY < 0 ? 0 : targetScrollY;
 
-            if(window.scrollY < targetScrollY) {
+            if (window.scrollY < targetScrollY) {
                 if (window.scrollY + speed < targetScrollY) {
                     window.scrollTo(x, currentScrollY + speed);
-                    requestAnimationFrame(function(){
+                    requestAnimationFrame(function () {
                         smoothScrollTo(x, targetScrollY, speed);
                     });
                 } else {
                     window.scrollTo(x, targetScrollY);
                 }
-            } else if(window.scrollY > targetScrollY) {
+            } else if (window.scrollY > targetScrollY) {
                 if (window.scrollY - speed > targetScrollY) {
                     window.scrollTo(0, currentScrollY - speed);
-                    requestAnimationFrame(function(){
+                    requestAnimationFrame(function () {
                         smoothScrollTo(x, targetScrollY, speed);
                     });
                 } else {

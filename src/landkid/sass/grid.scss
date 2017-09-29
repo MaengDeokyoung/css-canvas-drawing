@@ -2,6 +2,7 @@
     --gutter-size: 1rem;
 }
 * {
+    box-sizing: border-box;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -20,7 +21,7 @@ a {
 .container {
     width: 100%;
     height: auto;
-    padding-bottom: 2em;
+    margin-bottom: 2em;
     &::after {
         content: " ";
         clear: both;
@@ -91,19 +92,23 @@ a {
 [class*=col-] {
     border-radius: 5px;
     height: auto;
-    background-color: #2da9b1;
     text-align: center;
-    line-height: 5rem;
     font-size: 2rem;
     font-family: "Lucida Sans", sans-serif;
     transition: all 0.3s ease-in;
 
 }
 
+div [class*=col-] {
+    background-color: #2da9b1;
+    line-height: 3rem;
+
+}
+
 .content-title {
     background-color: #4A23BF;
     font-size: 3em;
-    line-height: 6em;
+    line-height: 4em;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px){
@@ -117,6 +122,7 @@ a {
         position: fixed;
         right: 0.25em;
         bottom: 1em;
+        z-index: 999;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
         & li {
@@ -142,19 +148,94 @@ a {
     }
 }
 
+table tr {
+    background-color: transparent;
+    border: 2px solid #cccccc;
+    line-height: 2rem;
+    & [class*="col-"] {
+        background-color: transparent;
+
+    }
+}
+
+
+.table-header {
+    display: none;
+}
+td {
+    line-height: 2rem;
+    & span {
+        text-align: left;
+        display: block;
+    }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1280px) {
     [class*="col-"] {
-        width: calc(50% - var(--gutter-size));
+        width: calc(33.33% - var(--gutter-size));
         margin:  calc(var(--gutter-size) / 2);
     }
     .scroll-navi {
         display: none;
     }
+
+    .table-header {
+        display: none;
+    }
+    td {
+        & span {
+            text-align: left;
+            display: block;
+        }
+    }
 }
 
-@media only screen and (min-width: 1280px){
+@media only screen and (min-width: 1280px) {
     .scroll-navi {
         display: none;
     }
+    .table-header {
+        display: block;
+    }
+    .table-row td span.label {
+        display: none;
+    }
+    .table-header {
+        background-color: #eee;
+    }
+    tr {
+        border-bottom: 2px solid #ccc;
+    }
+    td {
+        line-height: 2rem;
+        & span {
+            text-align: center;
+        }
+        & span.label {
+            display: none;
+        }
+    }
 }
+.table-header, .table-row {
+    padding: 0;
+    width: calc(100% - var(--gutter-size));
+    &::after {
+        content: " ";
+        clear: both;
+        display: block;
+    }
+    & td, th {
+        position: relative;
+        & span {
+            left: var(--gutter-size);
+        }
+        & span.label {
+            left: var(--gutter-size);
+            font-weight: bold;
+
+        }
+    }
+}
+
+
 
