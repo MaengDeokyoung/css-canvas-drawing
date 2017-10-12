@@ -233,7 +233,7 @@ slideValue3 = .9;
         if(isMouseDown){
             var endX = pado.width / 2 - e.clientX;
             var endY = firstY - e.clientY;
-            adjustedMouseY = - endY * 20 / (pado.height - 500);
+            adjustedMouseY = - endY * 20 / (pado.height / 4);
             adjustedMouseX = - endX;
         }
     }, false);
@@ -287,7 +287,7 @@ slideValue3 = .9;
         if(isMouseDown){
             var endX = firstX - e.touches[0].clientX;
             var endY = firstY - e.touches[0].clientY;
-            adjustedMouseY = - endY * 40 / (pado.height - 500);
+            adjustedMouseY = - endY * 20 / (pado.height / 4);
             adjustedMouseX = - endX;
             console.log(adjustedMouseX);
         }

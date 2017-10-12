@@ -15,14 +15,12 @@ var path = {
         root : 'src/',
         doc : 'src/doc/',
         landkid : 'src/landkid/',
-        landkid_img : 'src/landkid/img',
         hahamia : 'src/hahamia/'
     },
     dest : {
         root : 'dist/',
         doc : 'dist/doc/',
         landkid : 'dist/landkid/',
-        landkid_img : 'src/landkid/img',
         hahamia : 'dist/hahamia/'
     }
 }
@@ -74,6 +72,14 @@ gulp.task('copy-html', function(){
     .pipe(gulp.dest(path.dest.landkid))
     .pipe(browserSync.stream());
 
+    gulp.src([path.src.landkid + '**/*.svg'])
+        .pipe(gulp.dest(path.dest.landkid))
+        .pipe(browserSync.stream());
+
+    gulp.src([path.src.landkid + '**/*.mp3'])
+        .pipe(gulp.dest(path.dest.landkid))
+        .pipe(browserSync.stream());
+
     // hahamia html 복사
     gulp.src([path.src.hahamia + '**/*.html'])
     .pipe(gulp.dest(path.dest.hahamia))
@@ -105,6 +111,14 @@ gulp.task('build-js', function(){
     .pipe(browserSync.stream());
 
     gulp.src([path.src.landkid + '**/*.gif'])
+        .pipe(gulp.dest(path.dest.landkid))
+        .pipe(browserSync.stream());
+
+    gulp.src([path.src.landkid + '**/*.svg'])
+        .pipe(gulp.dest(path.dest.landkid))
+        .pipe(browserSync.stream());
+
+    gulp.src([path.src.landkid + '**/*.mp3'])
         .pipe(gulp.dest(path.dest.landkid))
         .pipe(browserSync.stream());
 
@@ -163,7 +177,7 @@ gulp.task('server', function(){
             baseDir: path.dest.root
         },
         port: config.port,
-        index : "/index.html"
+        index : "landkid/html/main.html"
 
     });
 

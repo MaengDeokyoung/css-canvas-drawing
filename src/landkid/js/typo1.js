@@ -87,8 +87,8 @@
                             clearInterval(intervalId);
                             index = 0;
                         }
-                    }).setStartDelay(8000).setDuration(500).reverse();
-                }).setStartDelay(200).setDuration(200).setRepeatCount(10).start();
+                    }).setStartDelay(3000).setDuration(500).reverse();
+                }).setStartDelay(200).setDuration(200).setRepeatCount(3).start();
             }).setStartDelay(0).setDuration(1000).start();
         }
 
