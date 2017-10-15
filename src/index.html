@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <HTML>
-    <HEAD>
-        <meta charset="UTF-8">
-        <title>index</title>
-        <link rel="stylesheet" href="doc/css/index-style.css">
-    </HEAD>
-    <BODY>
-        <p id="first-line">아침에 <strong>일찍</strong> 출근하기 위한</p>
-        <p id="second-line"><strong>비밀~</strong> 스터디!!!</p>
-    </BODY>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="doc/css/default.css">
+    <link rel="stylesheet" href="doc/css/index-style.css">
+    <script src="doc/js/jquery-3.2.1.min.js"></script>
+    <script src="//naver.github.io/egjs-infinitegrid/release/latest/dist/infinitegrid.pkgd.js"></script>
+    <script src="doc/js/index.js"></script>
+</HEAD>
+<BODY>
+<section id="gnb">
+    <a href="/" id="gnb-logo"><img src="/doc/img/tmp-logo.png" alt="임시로고"></a>
+    <a href="/landkid/html/main.html" id="landkid">LandKid</a>
+    <a href="#" id="hahamia">Hahamia</a>
+</section>
+<section id="contents">
+
+    <div id="root"></div>
+
+
+    <div id="grid" class="row"></div>
+
+</section>
+
+
+
+<script>
+    $(document).ready(function(){
+
+        /*  infiniteGrid 초기화 스켈레톤
+         // create InfiniteGrid ui without option
+         new eg.InfiniteGrid("#grid");
+
+         // create InfiniteGrid ui with options
+         new eg.InfiniteGrid("#grid",{
+         itemSelector: ".item"
+         });
+         */
+
+        function imgSrc(v) {
+            return "https://naver.github.io/egjs-infinitegrid/" + "assets/image/" + (((v + 1) % 60) + 1) + ".jpg";
+        }
+        function getItems(groupNo) {
+            groupNo *= 30;
+            var items = [];
+            for (var i = 0; i < 30; i++) {
+                items.push('<div class="item"><div class="thumbnail"><img src="' + imgSrc(groupNo + i) + '" /><div class="caption"><p><a href="http://www.google.com/">Cras justo odio bla bla bla bla bla bla bla bla</a></p></div></div></div>');
+            }
+            return items;
+        }
+
+
+        var ig = new eg.InfiniteGrid("#grid", {
+            count: 100,
+            defaultGroupKey: 0,
+            isOverflowScroll: false
+        }).on({
+            "append": function (e) {
+                var gk = this.getGroupKeys();
+                var lastGk = gk[gk.length - 1];
+                lastGk++;
+                ig.append(getItems(lastGk), lastGk);
+            },
+            "prepend": function (e) {
+                var firstGk = this.getGroupKeys()[0];
+                firstGk--;
+                if (firstGk >= 0) {
+                    ig.prepend(getItems(firstGk), firstGk);
+                }
+            }
+        });
+        console.log({
+            'gk' : ig.getGroupKeys(),
+            'lastGK' : ''
+        });
+        ig.append(getItems(0), 0);
+
+        $(window).on('resize', function(e){
+            console.log('resize event');
+            ig.layout();
+        });
+    });
+
+</script>
+</BODY>
 </HTML>

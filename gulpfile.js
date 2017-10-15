@@ -5,6 +5,7 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var scss = require('gulp-sass');
 var browserSync = require('browser-sync').create();
+var babel = require('gulp-babel');
 
 // gulp.task(name, deps, func)
 // name - task의 이름을 지정하고, 이름에는 공백이 포함되어서는 안됩니다.
@@ -94,8 +95,13 @@ gulp.task('build-js', function(){
     gulp.src([path.src.doc + '**/*.js'])
     // stripDebug : 모든 console.log, alert 제거
     // .pipe(stripDebug())
-    .pipe(gulp.dest(path.dest.doc))
-    .pipe(browserSync.stream());
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015','react']
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.dest.doc))
+        .pipe(browserSync.stream());
 
     // Build **/*.js in landkid
     gulp.src([path.src.landkid + '**/*.js'])
@@ -162,11 +168,19 @@ gulp.task('build-sass', function(){
 
 });
 
+// copy images
+gulp.task('copy-img', function(){
+    gulp.src([path.src.doc + 'img/**/*'])
+        .pipe(gulp.dest(path.dest.doc + 'img'))
+        .pipe(browserSync.stream());
+});
+
 // watch
 gulp.task('watch', function(){
     gulp.watch(path.src.root + '**/*.scss', ['build-sass']).on('change', browserSync.reload);
     gulp.watch(path.src.root + '**/*.js', ['build-js']).on('change', browserSync.reload);
     gulp.watch(path.src.root + '**/*.html', ['copy-html']).on('change', browserSync.reload);
+    gulp.watch(path.src.root + 'img/**/*', ['copy-img']).on('change', browserSync.reload);
     gulp.watch(path.src + '*.html', ['copy-html']).on('change', browserSync.reload)
 });
 
@@ -177,10 +191,10 @@ gulp.task('server', function(){
             baseDir: path.dest.root
         },
         port: config.port,
-        index : "landkid/html/main.html"
+        index : "/index.html"
 
     });
 
 });
 
-gulp.task('default', ['copy-html', 'build-js', 'build-sass', 'server', 'watch']);
+gulp.task('default', ['copy-html', 'build-js', 'build-sass', 'copy-img', 'server', 'watch']);
