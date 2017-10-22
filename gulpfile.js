@@ -6,6 +6,12 @@ var sourcemaps = require('gulp-sourcemaps');
 var scss = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var babel = require('gulp-babel');
+var gulpBrowserify = require('gulp-browserify');
+var browserify = require('vinyl-source-stream');
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config.js');
+var webpackStream = require('webpack-stream');
+var WebpackDevServer = require('webpack-dev-server');
 
 // gulp.task(name, deps, func)
 // name - task의 이름을 지정하고, 이름에는 공백이 포함되어서는 안됩니다.
@@ -92,15 +98,20 @@ gulp.task('copy-html', function(){
 gulp.task('build-js', function(){
 
     // Build **/*.js in Doc
-    gulp.src([path.src.doc + '**/*.js'])
+    gulp.src([path.src.doc + 'js/*.js'])
     // stripDebug : 모든 console.log, alert 제거
     // .pipe(stripDebug())
+    //     .pipe(sourcemaps.init())
+        .pipe(webpackStream(webpackConfig), webpack)
+        // .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.dest.doc+'js/'))
+        .pipe(browserSync.stream());
+
+    // lib
+    gulp.src([path.src.doc + 'js/lib/*.js'])
         .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['es2015','react']
-        }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(path.dest.doc))
+        .pipe(gulp.dest(path.dest.doc+'js/'))
         .pipe(browserSync.stream());
 
     // Build **/*.js in landkid
@@ -144,11 +155,8 @@ gulp.task('build-sass', function(){
     // scss 함수에 옵션값을 설정, scss 작성시 watch가 멈추지 않도록 logError를 설정
     .pipe(scss(scssOptions).on('error', scss.logError))
     // .pipe(rename(''))
-    // 소스맵 사용
     .pipe(sourcemaps.write())
-    // 코드 난독화
     // .pipe(uglify())
-    // dest 설정
     .pipe(gulp.dest(path.dest.doc + 'css/'))
     .pipe(browserSync.stream());
 
@@ -191,7 +199,8 @@ gulp.task('server', function(){
             baseDir: path.dest.root
         },
         port: config.port,
-        index : "/index.html"
+        index : "/index.html",
+        browser: "chrome"
 
     });
 

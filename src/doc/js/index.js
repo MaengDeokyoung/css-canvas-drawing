@@ -2,7 +2,7 @@
  * Created by projo on 2017-10-10.
  */
 
-// import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Contents from './Contents';
 
