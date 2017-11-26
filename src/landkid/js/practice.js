@@ -54,45 +54,45 @@ class Ball{
     };
 
     checkEdge(blocks){
-        if(radius * 2 + this.xpt > canvasPractice.width){
+        if(radius * 2 + this.xpt > canvasPractice.width - fraction){
             this.dx = -1;
         }
-        if(this.xpt < 0){
+        if(this.xpt < fraction){
             this.dx = 1;
         }
-        if(radius * 2 + this.ypt > canvasPractice.height){
+        if(radius * 2 + this.ypt > canvasPractice.height - fraction){
             this.dy = -1;
         }
-        if(this.ypt < 0){
+        if(this.ypt < fraction){
             this.dy = 1;
         }
 
-        // if(blocks !== undefined && blocks.length > 0){
-        //     for(let i = 0 ; i < blocks.length ; i++){
-        //         const block = blocks[i];
-        //
-        //         if(radius * 2 + this.xpt > block.x
-        //             && this.xpt < block.x + block.width
-        //             && radius * 2 + this.ypt > block.y
-        //             && this.ypt < block.y + block.height) {
-        //             if(radius * 2 + this.xpt - fraction <= block.x) {
-        //                 this.dx = -1;
-        //             }
-        //
-        //             if(this.xpt + fraction >= block.x + block.width) {
-        //                 this.dx = 1;
-        //             }
-        //
-        //             if(radius * 2 + this.ypt - fraction <= block.y) {
-        //                 this.dy = -1;
-        //             }
-        //
-        //             if(this.ypt + fraction >= block.y + block.height) {
-        //                 this.dy = 1;
-        //             }
-        //         }
-        //     }
-        // }
+        if(blocks !== undefined && blocks.length > 0){
+            for(let i = 0 ; i < blocks.length ; i++){
+                const block = blocks[i];
+
+                if(radius * 2 + this.xpt > block.x
+                    && this.xpt < block.x + block.width
+                    && radius * 2 + this.ypt > block.y
+                    && this.ypt < block.y + block.height) {
+                    if(radius * 2 + this.xpt - fraction <= block.x) {
+                        this.dx = -1;
+                    }
+
+                    if(this.xpt + fraction >= block.x + block.width) {
+                        this.dx = 1;
+                    }
+
+                    if(radius * 2 + this.ypt - fraction <= block.y) {
+                        this.dy = -1;
+                    }
+
+                    if(this.ypt + fraction >= block.y + block.height) {
+                        this.dy = 1;
+                    }
+                }
+            }
+        }
     };
 }
 
@@ -170,21 +170,21 @@ canvasPractice.addEventListener('mouseup', (e) => {
 
     const block = blocks[blocks.length - 1];
 
-    const newImgDwg = new ImageDrawing({
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKtYBBr8doTiJ7TjTwLgXAq_G7QDZ4HtbWoeWcsi0_ghBHap_QGVdr9k",
-        x: block.x,
-        y: block.y,
-        width: block.width,
-        height: block.height
-    });
+    // const newImgDwg = new ImageDrawing({
+    //     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTKtYBBr8doTiJ7TjTwLgXAq_G7QDZ4HtbWoeWcsi0_ghBHap_QGVdr9k",
+    //     x: block.x,
+    //     y: block.y,
+    //     width: block.width,
+    //     height: block.height
+    // });
+    //
+    // images.push(newImgDwg);
+    // imagesMask.push(newImgDwg);
+    //
+    // drawImages();
+    // drawImagesMask();
 
-    images.push(newImgDwg);
-    imagesMask.push(newImgDwg);
-
-    drawImages();
-    drawImagesMask();
-
-    blocks.pop();
+    //blocks.pop();
 
     //LK.createImage('image' + index, 'content', options);
 

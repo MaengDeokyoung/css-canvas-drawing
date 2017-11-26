@@ -2,9 +2,9 @@
 
     var items = [
         {
-            title: "Responsive web test",
-            desc: "반응형 웹 가이드를 위한 프로토타입.",
-            url: "/landkid/html/gs.html",
+            title: "canvas 그리기",
+            desc: "canvas 돋보기, 그리기",
+            url: "/landkid/html/practice.html",
             date: "2017/09/30"
         },
         {
@@ -22,73 +22,9 @@
 
     ];
 
-    var audio = new Audio("landkid/audio/jonhdenver-takemehomecountryroad.mp3");
+    var audio = new Audio("../audio/jonhdenver-takemehomecountryroad.mp3");
     audio.repeat = true;
     audio.play();
-
-
-    (function() {
-
-        var opus = {}
-
-        function OpusObject(){}
-
-        OpusObject.prototype.execute = function(what){
-            for(var  i = 0 ; i < this.length ; i++) {
-                var element = this[i];
-                what(element, i);
-            }
-            return this;
-        };
-
-        OpusObject.prototype.on = function(type, listener, useCapture){
-
-            if(useCapture){
-                useCapture = false;
-            }
-
-            for(var  i = 0 ; i < this.length ; i++) {
-                var element = this[i];
-                element.addEventListener(type, listener, useCapture);
-            }
-            return this;
-        };
-
-        var selectByClassName = function(className) {
-            var elements = document.getElementsByClassName(className);
-
-            var o = {};
-
-            for(var  i = 0 ; i < elements.length ; i++) {
-                o[i] = elements[i];
-            }
-
-            o.length = elements.length;
-
-            return OpusObject.apply(o, []);
-
-        };
-
-        var select = function(selector) {
-            var elements = document.querySelectorAll(selector);
-
-            var o = new OpusObject();
-
-            for(var  i = 0 ; i < elements.length ; i++) {
-                o[i] = elements[i];
-            }
-
-            o.length = elements.length;
-
-            return o;
-        };
-
-        opus.selectByClassName = selectByClassName;
-        opus.select = select;
-
-        window.OPUS = opus;
-
-    })();
 
     window.addEventListener('scroll', function(e){
 
@@ -125,7 +61,6 @@
         for(var i = 0 ; i < items.length ; i++) {
             var item = items[i];
             o.innerHTML += listItemEl(item, i);
-
         }
     });
 

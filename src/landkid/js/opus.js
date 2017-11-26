@@ -5,11 +5,14 @@
     function OpusObject(){}
 
     OpusObject.prototype.execute = function(what){
-        for(var  i = 0 ; i < this.length ; i++) {
-            var element = this[i];
-            what(element, i);
+        var elements = this;
+        for(var  i = 0 ; i < elements.length ; i++) {
+            (function(i) {
+                var element = elements[i];
+                what(element, i);
+            })(i);
         }
-        return this;
+        return elements;
     };
 
     OpusObject.prototype.on = function(type, listener, useCapture){
@@ -28,15 +31,16 @@
     var selectByClassName = function(className) {
         var elements = document.getElementsByClassName(className);
 
-        var o = {};
+        var o = new OpusObject();
 
         for(var  i = 0 ; i < elements.length ; i++) {
-            o[i] = elements[i];
-        }
+            (function(i){
+                o[i] = elements[i];
+            })(i);        }
 
         o.length = elements.length;
 
-        return OpusObject.apply(o, []);
+        return o;
 
     };
 
@@ -46,7 +50,9 @@
         var o = new OpusObject();
 
         for(var  i = 0 ; i < elements.length ; i++) {
-            o[i] = elements[i];
+            (function(i){
+                o[i] = elements[i];
+            })(i);
         }
 
         o.length = elements.length;
@@ -58,5 +64,4 @@
     opus.select = select;
 
     window.OPUS = opus;
-
 })();

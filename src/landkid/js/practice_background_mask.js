@@ -27,8 +27,8 @@ image2.src = "../img/lion.gif";
 
 const drawEasterEgg = () => {
     ctxBgMask.fillText("google", objectPadding + 630 + dx, 100 + dy);
-    ctxBgMask.drawImage(image1, objectPadding + 330 + dx, 400 + dy, image1.width, image1.height);
-    ctxBgMask.drawImage(image2, objectPadding + 220 + dx, 300 + dy, image2.width, image2.height);
+    // ctxBgMask.drawImage(image1, objectPadding + 330 + dx, 400 + dy, image1.width, image1.height);
+    // ctxBgMask.drawImage(image2, objectPadding + 220 + dx, 300 + dy, image2.width, image2.height);
 };
 
 const drawMagnifyingGlass = (x, y) => {
