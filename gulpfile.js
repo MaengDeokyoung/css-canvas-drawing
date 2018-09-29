@@ -199,7 +199,7 @@ gulp.task('server', function(){
             baseDir: path.dest.root
         },
         port: config.port,
-        index : "/index.html",
+        index : "/main.html",
         browser: "chrome"
 
     });
