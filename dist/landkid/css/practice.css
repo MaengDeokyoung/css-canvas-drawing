@@ -1,0 +1,46 @@
+/* line 1, src/landkid/sass/practice.scss */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* line 6, src/landkid/sass/practice.scss */
+html {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+}
+
+/* line 12, src/landkid/sass/practice.scss */
+canvas {
+	display: inline-block;
+}
+
+/* line 15, src/landkid/sass/practice.scss */
+#practice {
+	z-index: 100;
+}
+
+/* line 19, src/landkid/sass/practice.scss */
+body {
+	width: 100%;
+	height: 100%;
+}
+
+/* line 24, src/landkid/sass/practice.scss */
+img {
+	position: absolute;
+}
+
+/* line 31, src/landkid/sass/practice.scss */
+#scope {
+	z-index: 99;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	overflow: hidden;
+	border-radius: 150px;
+	border: 5px black solid;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJhY3RpY2UuY3NzIiwic291cmNlcyI6WyJwcmFjdGljZS5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIioge1xuICBtYXJnaW46MDtcbiAgcGFkZGluZzowO1xufVxuXG5odG1se1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICB3aWR0aDoxMDAlO1xuICBoZWlnaHQ6MTAwJTtcbn1cblxuY2FudmFzIHtcbiAgZGlzcGxheTppbmxpbmUtYmxvY2s7XG59XG4jcHJhY3RpY2Uge1xuICB6LWluZGV4OjEwMFxufVxuXG5ib2R5e1xuICB3aWR0aDoxMDAlO1xuICBoZWlnaHQ6MTAwJTtcbn1cblxuaW1ne1xuICBwb3NpdGlvbjphYnNvbHV0ZTtcbn1cbiNwcmFjdGljZV9iYWNrZ3JvdW5kX21hc2t7XG5cbn1cblxuI3Njb3BlIHtcbiAgei1pbmRleDo5OTtcbiAgd2lkdGg6IDIwMHB4O1xuICBoZWlnaHQ6IDIwMHB4O1xuICBwb3NpdGlvbjphYnNvbHV0ZTtcbiAgb3ZlcmZsb3c6aGlkZGVuO1xuICBib3JkZXItcmFkaXVzOiAxNTBweDtcbiAgYm9yZGVyOiA1cHggYmxhY2sgc29saWQ7XG59XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLEFBQUEsQ0FBQyxDQUFDO0NBQ0EsTUFBTSxFQUFDLENBQUM7Q0FDUixPQUFPLEVBQUMsQ0FBQztDQUNWOzs7QUFFRCxBQUFBLElBQUksQ0FBQTtDQUNGLFVBQVUsRUFBRSxVQUFVO0NBQ3RCLEtBQUssRUFBQyxJQUFJO0NBQ1YsTUFBTSxFQUFDLElBQUk7Q0FDWjs7O0FBRUQsQUFBQSxNQUFNLENBQUM7Q0FDTCxPQUFPLEVBQUMsWUFBWTtDQUNyQjs7O0FBQ0QsQUFBQSxTQUFTLENBQUM7Q0FDUixPQUFPLEVBQUMsR0FDVjtDQUFDOzs7QUFFRCxBQUFBLElBQUksQ0FBQTtDQUNGLEtBQUssRUFBQyxJQUFJO0NBQ1YsTUFBTSxFQUFDLElBQUk7Q0FDWjs7O0FBRUQsQUFBQSxHQUFHLENBQUE7Q0FDRCxRQUFRLEVBQUMsUUFBUTtDQUNsQjs7O0FBS0QsQUFBQSxNQUFNLENBQUM7Q0FDTCxPQUFPLEVBQUMsRUFBRTtDQUNWLEtBQUssRUFBRSxLQUFLO0NBQ1osTUFBTSxFQUFFLEtBQUs7Q0FDYixRQUFRLEVBQUMsUUFBUTtDQUNqQixRQUFRLEVBQUMsTUFBTTtDQUNmLGFBQWEsRUFBRSxLQUFLO0NBQ3BCLE1BQU0sRUFBRSxlQUFlO0NBQ3hCIn0= */
