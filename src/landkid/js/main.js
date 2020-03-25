@@ -4,19 +4,19 @@
         {
             title: "canvas 그리기",
             desc: "canvas 돋보기, 그리기",
-            url: "/css-canvas-drawing/dist/landkid/html/practice.html",
+            url: "/landkid/html/practice.html",
             date: "2017/09/30"
         },
         {
             title: "Psychi Text Animation",
             desc: "This animation is made by canvas drawing.",
-            url: "/css-canvas-drawing/dist/landkid/html/typo1.html",
+            url: "/landkid/html/typo1.html",
             date: "2017/09/30"
         },
         {
             title: "Pado Animation",
             desc: "This animation is made by canvas drawing.",
-            url: "/css-canvas-drawing/dist/landkid/html/pado.html",
+            url: "/landkid/html/pado.html",
             date: "2017/09/30"
         }
 

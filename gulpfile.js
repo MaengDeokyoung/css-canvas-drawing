@@ -87,6 +87,10 @@ gulp.task('copy-html', function(){
         .pipe(gulp.dest(path.dest.landkid))
         .pipe(browserSync.stream());
 
+    gulp.src([path.src.landkid + '**/*.mp4'])
+        .pipe(gulp.dest(path.dest.landkid))
+        .pipe(browserSync.stream());
+
     // hahamia html 복사
     gulp.src([path.src.hahamia + '**/*.html'])
     .pipe(gulp.dest(path.dest.hahamia))

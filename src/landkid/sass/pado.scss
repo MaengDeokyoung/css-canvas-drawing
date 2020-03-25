@@ -4,7 +4,7 @@ canvas {
 }
 
 body {
-    background-color: #222;
+    background-color: #39418f;
     overflow: hidden;
     position: relative;
 }
@@ -20,9 +20,7 @@ body {
         position: absolute;
         left: 330px;
         margin: 20px;
-
         top: 0;
-
     }
 }
 
@@ -34,4 +32,12 @@ body {
     display: block;
     overflow: hidden;
     border: 5px #000000 solid;
+}
+
+video {
+    width: 13%;
+    padding-top: 13%;
+    position: fixed;
+    bottom: 0;
+    left: 25%;
 }

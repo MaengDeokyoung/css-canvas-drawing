@@ -37,6 +37,8 @@ var slideValue3 = .9;
         moonCtx.shadowOffsetX = 0;
         moonCtx.shadowOffsetY = 0;
         moonCtx.shadowBlur = 50;
+        moonCtx.lineWidth = 5;
+        moonCtx.stroke();
         moonCtx.fill();
     }
 
@@ -62,12 +64,11 @@ var slideValue3 = .9;
                 padoCtx.lineTo(x, y + (adjustedOffset + vibrate * cycleValue));
             }
 
+            padoCtx.lineWidth = 3;
+
             padoCtx.lineTo(w, h);
             padoCtx.lineTo(0, h);
-            padoCtx.shadowColor = "#fff";
-            padoCtx.shadowOffsetX = 0;
-            padoCtx.shadowOffsetY = 0;
-            padoCtx.shadowBlur = 0;
+            padoCtx.stroke();
             padoCtx.fill();
         }
 
@@ -193,9 +194,9 @@ var slideValue3 = .9;
         moonCtx.clearRect(0, 0, moon.width, moon.height);
 
         drawMoon();
-        drawPado(pado.width, pado.height, 101, 0.005, 7, pado.height * 3 / 4, "rgba(17, 147, 173, 0.5)", 19 ,23);
-        drawPado(pado.width, pado.height, 73, 0.007, 5, pado.height * 3 / 4, "rgba(103, 199, 234, 0.5)", 17, 37);
-        drawPado(pado.width , pado.height, 83, 0.01, 11, pado.height * 3 / 4, "rgba(77, 224, 204, 0.5)", 29, 31);
+        drawPado(pado.width, pado.height, 101, 0.005, 7, pado.height * 3 / 4, "rgba(71, 78, 161, 1)", 19 ,23);
+        drawPado(pado.width , pado.height, 83, 0.01, 11, pado.height * 3 / 4, "rgba(110, 122, 255, 1)", 29, 31);
+        drawPado(pado.width, pado.height, 73, 0.007, 5, pado.height * 3 / 4, "rgba(100, 104, 243, 1)", 17, 37);
 
         frames++;
     }
